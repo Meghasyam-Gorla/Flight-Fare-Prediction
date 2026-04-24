@@ -4,11 +4,6 @@ A machine learning web application that predicts Indian domestic flight ticket p
 
 ---
 
-## 🔗 Live Demo
-[Click here to view the app](https://your-app-name.streamlit.app)
-
----
-
 ## 📌 Project Overview
 
 This project uses a **Random Forest Regressor** model trained on Indian domestic flight data to predict ticket prices. The model was tuned using **RandomizedSearchCV** for optimal performance. The web application is built using **Streamlit** and deployed on **Streamlit Cloud**.
