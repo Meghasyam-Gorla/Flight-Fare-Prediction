@@ -1,23 +1,35 @@
-import streamlit as st
+import os
+import gdown
 import pickle
+import streamlit as st
 import numpy as np
 from datetime import date
 
-# ── Page config ────────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="Flight Fare Predictor",
     page_icon="✈️",
     layout="centered",
 )
 
-# ── Load model ─────────────────────────────────────────────────────────────────
 @st.cache_resource
 def load_model():
+    if not os.path.exists("flight_rf.pkl"):
+        with st.spinner("Downloading model..."):
+            gdown.download(
+                id="15Wg4aZjSOCmU2OHGjJtzL0aC43sBCb9K",
+                output="flight_rf.pkl",
+                quiet=False
+            )
     with open("flight_rf.pkl", "rb") as f:
         return pickle.load(f)
 
-model = load_model()
-
+# Load model with error handling
+try:
+    model = load_model()
+    st.success("Model loaded successfully!")
+except Exception as e:
+    st.error(f"Failed to load model: {e}")
+    st.stop()
 # ── Title ───────────────────────────────────────────────────────────────────────
 st.title("✈️ Flight Fare Predictor")
 st.write("Fill in the flight details below to get an estimated fare price.")
